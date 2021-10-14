@@ -90,7 +90,11 @@ fn make_image(unique_trans: usize, num_trans: usize, size: usize, seed: u64) -> 
     let mut count = 0;
     let mut characteristic_width = bucket_width;
     for (i, b) in buckets.iter().enumerate() {
-        count += b;
+        if i == 0 {
+            count += b/2
+        } else {
+            count += b;
+        }
         if count > size.pow(2) * 3 / 2 {
             characteristic_width = i as f64 * bucket_width;
             break;
