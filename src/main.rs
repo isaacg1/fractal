@@ -91,7 +91,7 @@ fn make_image(unique_trans: usize, num_trans: usize, size: usize, seed: u64) -> 
     let mut characteristic_width = bucket_width;
     for (i, b) in buckets.iter().enumerate() {
         if i == 0 {
-            count += b/2
+            count += b / 2
         } else {
             count += b;
         }
@@ -113,12 +113,14 @@ fn make_image(unique_trans: usize, num_trans: usize, size: usize, seed: u64) -> 
 }
 
 fn main() -> Result<(), ImageError> {
-    let unique_trans = 100;
-    let num_trans = 1000;
-    let size = 1000;
-    let seed = 0;
-    let filename = format!("img-{}-{}-{}-{}.png", unique_trans, num_trans, size, seed);
-    println!("{}", filename);
-    let img = make_image(unique_trans, num_trans, size, seed);
-    img.save(filename)
+    for seed in 0..20 {
+        let unique_trans = 100;
+        let num_trans = 1000;
+        let size = 1000;
+        let filename = format!("img-{}-{}-{}-{}.png", unique_trans, num_trans, size, seed);
+        println!("{}", filename);
+        let img = make_image(unique_trans, num_trans, size, seed);
+        img.save(filename)?
+    }
+    Ok(())
 }
